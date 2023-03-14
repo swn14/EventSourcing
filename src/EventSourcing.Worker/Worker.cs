@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2.DataModel;
 using NATS.Client;
 
 namespace EventSourcing.Worker;
@@ -6,11 +7,13 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IConnection _natsConnection;
+    private readonly IDynamoDBContext _dynamoContext;
 
-    public Worker(ILogger<Worker> logger, IConnection natsConnection)
+    public Worker(ILogger<Worker> logger, IConnection natsConnection, IDynamoDBContext dynamoContext)
     {
         _logger = logger;
         _natsConnection = natsConnection;
+        _dynamoContext = dynamoContext;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
