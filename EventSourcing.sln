@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{309B3A97-52A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcing.Application", "src\EventSourcing.Application\EventSourcing.Application.csproj", "{FA6EC399-AB3E-4033-BA15-972B0D861AEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcing.Worker", "src\EventSourcing.Worker\EventSourcing.Worker.csproj", "{17A1A02F-98CE-4822-B8EC-5096376739E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{FA6EC399-AB3E-4033-BA15-972B0D861AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA6EC399-AB3E-4033-BA15-972B0D861AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA6EC399-AB3E-4033-BA15-972B0D861AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A1A02F-98CE-4822-B8EC-5096376739E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A1A02F-98CE-4822-B8EC-5096376739E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A1A02F-98CE-4822-B8EC-5096376739E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A1A02F-98CE-4822-B8EC-5096376739E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FA6EC399-AB3E-4033-BA15-972B0D861AEE} = {309B3A97-52AB-48F7-B794-7615F30AADB0}
+		{17A1A02F-98CE-4822-B8EC-5096376739E6} = {309B3A97-52AB-48F7-B794-7615F30AADB0}
 	EndGlobalSection
 EndGlobal

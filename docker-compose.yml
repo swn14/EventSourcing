@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  nats:
+    image: nats:2.9.15-alpine3.17
+    ports:
+      - "8222:8222"
+      - "4222:4222"
+    command: "-c /etc/nats/nats.conf --cluster_name NATS --cluster nats://0.0.0.0:6222 -m 8222"
+    volumes:
+      - ./nats-config/:/etc/nats
+    networks: ["event-sourcing-network"]
+
+  nats-1:
+    image: nats:2.9.15-alpine3.17
+    command: "-c /etc/nats/nats.conf --cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://myuser:T0pS3cr3t@nats:6222"
+    volumes:
+      - ./nats-config/:/etc/nats
+    networks: ["event-sourcing-network"]
+    depends_on: ["nats"]
+
+  nats-2:
+    image: nats:2.9.15-alpine3.17
+    command: "-c /etc/nats/nats.conf --cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://myuser:T0pS3cr3t@nats:6222"
+    volumes:
+      - ./nats-config/:/etc/nats
+    networks: ["event-sourcing-network"]
+    depends_on: ["nats"]
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/
+    ports:
+      - "8000:8000"
+    volumes:
+      - dynamodb-data:/home/dynamodblocal/
+      - ~/.aws:/home/dynamodblocal/.aws:ro
+    networks: ["event-sourcing-network"]
+
+  dynamodb-admin:
+    image: node:lts-alpine
+    command: sh -c "npm install dynamodb-admin -g && dynamodb-admin"
+    ports:
+      - "8001:8001"
+    environment:
+      DYNAMO_ENDPOINT: http://dynamodb:8000
+    volumes:
+      - ~/.aws:/root/.aws:ro
+    networks: ["event-sourcing-network"]
+
+volumes:
+  dynamodb-data:
+
+networks:
+  event-sourcing-network:
+    driver: bridge
